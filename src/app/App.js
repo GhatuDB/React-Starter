@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from "./Home/Home";
 import About from "./About/About";
+import Todos from "./Todos/Todos";
 import './App.css';
 
 class App extends Component {
@@ -16,9 +17,13 @@ class App extends Component {
             <li className="nav-item">
               <Link className="nav-link" to="/about/">About</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/todos/">Todos</Link>
+            </li>
           </ul>
           <Route path="/" exact component={Home} />
           <Route path="/about/" component={About} />
+          <Route path="/todos/" component={Todos} />
         </div>
       </Router>
     );
