@@ -5,9 +5,10 @@ class Todos extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { items: [], text: '', id : 0 };
+    this.state = { items: [], text: '', id: 0 };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleEditTodos = this.handleEditTodos.bind(this);
   }
 
   render() {
@@ -25,9 +26,15 @@ class Todos extends Component {
             </div>
           </form>
         </div>
-        <TodoList items={this.state.items}/>
+        <TodoList items={this.state.items} editTodos={this.handleEditTodos} />
       </div>
     );
+  }
+  handleEditTodos(item) {
+    this.setState({
+      text: item.text,
+      id: item.id
+    })
   }
 
   handleChange(e) {
