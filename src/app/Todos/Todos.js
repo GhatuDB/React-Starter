@@ -33,7 +33,8 @@ class Todos extends Component {
   handleEditTodos(item) {
     this.setState({
       text: item.text,
-      id: item.id
+      id: item.id,
+      mode: 'edit'
     })
   }
 
@@ -46,14 +47,29 @@ class Todos extends Component {
     if (!this.state.text.length) {
       return;
     }
-    const newItem = {
-      text: this.state.text,
-      id: Date.now()
-    };
-    this.setState(state => ({
-      items: state.items.concat(newItem),
-      text: ''
-    }));
+    if (this.state.mode === 'edit') {
+      this.state.items.map((item) => {
+        if (item.id == this.state.id) {
+          item.text = this.state.text;
+          item.mode = 'new'
+        }
+        this.setState(state => ({
+          items: state.items,
+          text: '',
+          mode: 'new'
+        }));
+      })
+    } else {
+      const newItem = {
+        text: this.state.text,
+        id: Date.now(),
+        mode: 'new'
+      };
+      this.setState(state => ({
+        items: state.items.concat(newItem),
+        text: ''
+      }));
+    }
   }
 }
 
